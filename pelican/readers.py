@@ -246,7 +246,8 @@ class MarkdownReader(BaseReader):
 
     def __init__(self, *args, **kwargs):
         super(MarkdownReader, self).__init__(*args, **kwargs)
-        self.extensions = list(self.settings['MD_EXTENSIONS'])
+        self.extension_configs = self.settings['MD_EXTENSION_CONFIGS']
+        self.extensions = self.settings['MD_EXTENSIONS']
         if 'meta' not in self.extensions:
             self.extensions.append('meta')
         self._source_path = None
@@ -284,7 +285,8 @@ class MarkdownReader(BaseReader):
         """Parse content and metadata of markdown files"""
 
         self._source_path = source_path
-        self._md = Markdown(extensions=self.extensions)
+        self._md = Markdown(extensions=self.extensions,
+                            extension_configs=self.extension_configs)
         with pelican_open(source_path) as text:
             content = self._md.convert(text)
 

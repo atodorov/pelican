@@ -101,7 +101,13 @@ DEFAULT_CONFIG = {
     'PELICAN_CLASS': 'pelican.Pelican',
     'DEFAULT_DATE_FORMAT': '%a %d %B %Y',
     'DATE_FORMATS': {},
-    'MD_EXTENSIONS': ['codehilite(css_class=highlight)', 'extra'],
+    'MD_EXTENSIONS': [
+        'markdown.extensions.codehilite',
+        'markdown.extensions.extra',
+    ],
+    'MD_EXTENSION_CONFIGS': {
+        'markdown.extensions.codehilite' : {'css_class': 'highlight'},
+    },
     'JINJA_EXTENSIONS': [],
     'JINJA_FILTERS': {},
     'LOG_FILTER': [],
