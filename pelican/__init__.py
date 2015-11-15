@@ -141,36 +141,6 @@ class Pelican(object):
                 )
                 self.settings[old] = self.settings[new]
 
-        # Markdown 2.6 deprecations
-        for i, extension in enumerate(self.settings['MD_EXTENSIONS']):
-            try: name, params = extension.split('(')
-            except (ValueError, AttributeError):
-                if (isinstance(extension, six.string_types) and
-                    not extension.startswith('markdown.extensions.')):
-                    logger.warning('Found deprecated short declaration of '
-                                   'Markdown extension "%(name)s". Specify it '
-                                   'by its fully-qualified name '
-                                   '"markdown.extensions.%(name)s".',
-                                   {'name': extension})
-                    extension = 'markdown.extensions.' + extension
-                    self.settings['MD_EXTENSIONS'][i] = extension
-                # The extension is a fully-qualified string without config
-                # parameters, or an object instance, both of which are fine.
-                continue
-            logger.warning('Found deprecated configuration of Markdown '
-                           'extensions in MD_EXTENSIONS. Use '
-                           'MD_EXTENSION_CONFIGS instead.')
-            name = name.strip()
-            self.settings['MD_EXTENSIONS'][i] = name
-
-            config = {}
-            for key, value in re.findall(r'([\w_]+?)\s*=\s*([^,\)]*)', params):
-                if value in ('True', 'False', 'None') or value.isdigit():
-                    value = eval(value)
-                config[key] = value
-            self.settings['MD_EXTENSION_CONFIGS'][name] = config
-
-
     def run(self):
         """Run the generators and return"""
         start_time = time.time()
