@@ -371,7 +371,7 @@ def configure_settings(settings):
         logger.warning('The format of the MD_EXTENSIONS setting has '
                        'changed. It should now be a dict mapping '
                        'fully-qualified extension names to their '
-                       'configurations. Falling back to the default')
+                       'configurations. Falling back to the default.')
         settings['MD_EXTENSIONS'] = DEFAULT_CONFIG['MD_EXTENSIONS']
 
     # Add {PAGE,ARTICLE}_PATHS to {ARTICLE,PAGE}_EXCLUDES

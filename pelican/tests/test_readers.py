@@ -474,7 +474,8 @@ class MdReaderTest(ReaderTest):
             MD_EXTENSIONS={
                 'markdown.extensions.toc': {},
                 'markdown.extensions.codehilite': {},
-                'markdown.extensions.extra': {}})
+                'markdown.extensions.extra': {}
+            })
         expected = ('<div class="toc">\n'
                     '<ul>\n'
                     '<li><a href="#level1">Level1</a><ul>\n'
